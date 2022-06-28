@@ -1,4 +1,4 @@
-package com.mrcoder.customer_creation_service.service;
+package com.mrcoder.junit.mockito.service;
 
 //import org.mockito.Mock;
 import org.junit.jupiter.api.Assertions;

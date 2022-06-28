@@ -1,4 +1,4 @@
-package com.mrcoder.customer_creation_service.models;
+package com.mrcoder.junit.mockito.models;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.mrcoder.customer_creation_service.service;
+package com.mrcoder.junit.mockito.service;
 
-import com.mrcoder.customer_creation_service.dao.CustomerDao;
-import com.mrcoder.customer_creation_service.services.CustomerCreationService;
+import com.mrcoder.junit.mockito.dao.CustomerDao;
+import com.mrcoder.junit.mockito.services.CustomerCreationService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

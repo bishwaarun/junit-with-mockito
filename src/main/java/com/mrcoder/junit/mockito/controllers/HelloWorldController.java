@@ -1,4 +1,4 @@
-package com.mrcoder.customer_creation_service.controllers;
+package com.mrcoder.junit.mockito.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,8 +1,8 @@
-package com.mrcoder.customer_creation_service.services;
+package com.mrcoder.junit.mockito.services;
 
 //import com.mrcoder.customer_creation_service.dao;
 
-import com.mrcoder.customer_creation_service.dao.CustomerDao;
+import com.mrcoder.junit.mockito.dao.CustomerDao;
 
 public class CustomerCreationService {
 

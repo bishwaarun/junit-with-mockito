@@ -1,4 +1,4 @@
-package com.mrcoder.customer_creation_service;
+package com.mrcoder.junit.mockito;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

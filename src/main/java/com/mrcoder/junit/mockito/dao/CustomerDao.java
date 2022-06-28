@@ -1,4 +1,4 @@
-package com.mrcoder.customer_creation_service.dao;
+package com.mrcoder.junit.mockito.dao;
 
 public interface CustomerDao {
     int[] findCustomerDetails();

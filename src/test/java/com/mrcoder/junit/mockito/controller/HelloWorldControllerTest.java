@@ -1,6 +1,6 @@
-package com.mrcoder.customer_creation_service.controller;
+package com.mrcoder.junit.mockito.controller;
 
-import com.mrcoder.customer_creation_service.controllers.HelloWorldController;
+import com.mrcoder.junit.mockito.controllers.HelloWorldController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.params.shadow.com.univocity.parsers.conversions.Conversions.string;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
