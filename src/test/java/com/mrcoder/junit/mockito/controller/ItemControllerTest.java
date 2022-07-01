@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,6 +27,21 @@ public class ItemControllerTest {
 
     @MockBean
     private ItemBusinessService itemBusinessService;
+
+    @Test
+    public void retrieveAllItems_basic() throws Exception {
+        when(itemBusinessService.retrieveAllItems()).thenReturn(
+                Arrays.asList(new Item(1,"Item1",10,20),
+                        new Item(2,"Item2",11,21)
+                ));
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get("/all-item-from-database")
+                .accept("application/json");
+        MvcResult mvcResult =  mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{id:1,name:Item1,price:10},{id:2,name:Item2,price:11}]"))
+                .andReturn();
+    }
 
     @Test
     public void itemFromBusinessService_basis() throws Exception {
