@@ -1,0 +1,287 @@
+Junit 5 with Mockito 3
+---------------------------
+Session 1
+----------
+
+* Unit testing
+- Here unit indicates a part of a project which can be a task story.
+- Once code is completed by developer, then that part must be tested
+
+Unit Testing = Testing once part project developed by programmer.
+
+
+* Junit 5:
+- Junit is a unit test framework. it is opensource java library.
+- To test our code(class), we need to define one class that is called as Test case (Test class).
+
+* To define one test case we should use 
+1. Junit 5 Annotations
+- @Test
+- @DisplayName
+- @BeforeEach
+- @AfterEach
+- @BeforeAll
+- @AfterAll
+- @Disabled
+- @TestMethodOrder
+- @RepeatedTest
+- @Tag
+ 
+2. Junit 5 Assert API
+
+
+- Here, Juniy Runtime is provided with 3 components and one platform runtime.
+i.   Junit Jupiter Engine (Junit 5 API).
+ii.  Junit Vintage Engine (Junit 4 and 4 APIs)
+iii. Integration (TestNG, Mock ... etc)
+
+- For our test cases (Class + method) object creation and test-method calling done by Junit platform runtime.
+
+
+1. @Test
+
+Example
+------
+package com.junit_test;
+
+import org.junit.jupiter.api.Test;
+
+public class TestEmployee {
+	
+	@Test
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	public void testUpdate() {
+		System.out.println("Update-Test");
+	}
+
+}
+
+Output:
+--------
+Save-Test
+Update-Test
+
+2. - @TestMethodOrder
+- We can define multiple test method inside testcase. Those are executed in Random order by default
+- We can specify our own oder using @TestMethodOrder + OrderAnnotation.
+- Here we need to provide @Order(Number)
+- Order number is same there is no problem.
+
+Example:
+@TestMethodOrder(OrderAnnotation.class)
+public class TestEmployee {
+	
+	@Test
+	@Order(4)
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	@Order(2)
+	public void testUpdate() {
+		System.out.println("Update-Test");
+	}
+
+}
+
+- We can use @TestMethodOrder(Alphanumeric.class) for provide test method order.
+- First sort using 0-9 if same found then compare wuth A-Z sorting order
+
+- Example
+@TestMethodOrder(Alphanumeric.class)
+public class TestEmployee {
+	
+	@Test
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	public void test3Update() {
+		System.out.println("Update-Test");
+	}
+
+	@Test
+	public void testDelete() {
+		System.out.println("Delete-Test");
+	}
+	
+}
+
+Output:
+Update-Test
+Delete-Test
+Save-Test
+
+
+3. 
+- @BeforeEach: To execute any logic once per test method before starting it.
+- @AfterEach: To execute any logic once per test method after finishing it.
+- @BeforeAll: To execute any logic once per test case before starting.
+- @AfterAll: To execute any logic once per test case after finishing.
+
+Example:
+---------
+public class TestEmployee {
+
+	@BeforeAll
+	public static void setupOnce() {
+		System.out.println("From-Setup Once");
+	}
+	
+	@BeforeEach
+	public void setup() {
+		System.out.println("From-Setup");
+	}
+	
+	@Test
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	public void testUpdate() {
+		System.out.println("Update-Test");
+	}
+	
+	@AfterEach
+	public void clear() {
+		System.out.println("Clear-Setup");
+	}
+	
+	@AfterAll
+	public static void clearOnce() {
+		System.out.println("Clear-Setup Once");
+	}
+}
+
+
+Output:
+----------
+From-Setup Once
+From-Setup
+Save-Test
+Clear-Setup
+
+From-Setup
+Update-Test
+Clear-Setup
+Clear-Setup Once
+
+
+*) @DisplayName: 
+- This annotation is used to provide 'Readable Text' in place of actual method and class name at Junit Console.
+Example:
+
+@DisplayName("Testing Employee Task")
+public class TestEmployee {
+
+	
+	@Test
+	@DisplayName("Testing Save Method")
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	@DisplayName("Testing Update Method")
+	public void testUpdate() {
+		System.out.println("Update-Test");
+	}
+}
+
+*) @Disabled: thi annotation is used to specify ignore one test-method while executing test-case (do not execute test method)
+
+Example:
+
+@Test
+	@DisplayName("Testing Save Method")
+	public void testSave() {
+		System.out.println("Save-Test");
+	}
+	
+	@Test
+	@Disabled
+	@DisplayName("Testing Update Method")
+	public void testUpdate() {
+		System.out.println("Update-Test");
+	}
+
+Note: testUpdate() is temporarily disabled.
+
+*) @RepeatedTest:
+- to execute any test method multiple time (like batch processing)
+EX: Export 1-10 Records, 10-20 Records.
+
+*) TestInfo
+- To know our test case details like classname, method name, display name, tag name etc. We can use once interface TestInfo
+
+Example:
+public class TestEmployee {
+
+	@RepeatedTest(value =3, name = "{displayName} {currentRepetition}/{totalRepetitions}")
+	@DisplayName("Multiple Task")
+	public void testMultiple(TestInfo testInfo) {
+		System.out.println("Hello "+testInfo.getTestClass().get().getName());
+		System.out.println("DisHello: "+testInfo.getDisplayName());
+	}
+}
+
+Output:
+Hello com.junit_test.TestEmployee
+DisHello: Multiple Task 1/3
+Hello com.junit_test.TestEmployee
+DisHello: Multiple Task 2/3
+Hello com.junit_test.TestEmployee
+DisHello: Multiple Task 3/3
+
+*) @Tag
+- These are used to filter test methods for execution in different environments.
+For example, i want to test export example in production env at same i want to test delete operation only in development environment then use tag concept and maven-surefire-plugin in pox.xml
+
+<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M5</version>
+					<configuration>
+						<!-- include tag -->
+						<groups>Dev</groups>
+						<!-- exclude tag -->
+						<excludedGroups>Prod</excludedGroups>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	
+	@Test
+	@Tag("Prod")
+	public void testA() {
+		System.out.println("HELLO-TEST-A");
+	}
+	
+	@Test
+	@Tag("Dev")
+	public void testB() {
+		System.out.println("HELLO-TEST-B");
+	}
+
+
+Junit-5 Session-2
+
+
+Assert API:
+- It is used to validate Test, IS CURRENT TEST PASS/FAIL ?
+- Expected value is compared with Actual Result.
+
+
+ 
+
