@@ -54,7 +54,7 @@ Note: For our test cases (Class + method) object creation and test-method callin
 **Explaination**
 - Junit Runtime is executed on the top of java.
 - Junit Platform Runtime takes test cases classes and executes it on the top of JRE.
-- Object creation and methods calling are done by Junit Platform Runtime.
+- For out test cases (Class + method) object creation and methods calling are done by Junit Platform Runtime.
 - It has 3 components.
     - Junit Jupiter Engine: It is also called Junit 5
     - Junit Vintage Engine: It is 4.x/3.x junit which is older version.
@@ -132,7 +132,7 @@ public class TestEmployee {
 
 b.<u>Alphanumeric</u>
 - We can use @TestMethodOrder(Alphanumeric.class) for provide test method order.
-- First sort using 0-9 if same found then compare wuth A-Z sorting order
+- First sort using 0-9 if same found then compare with A-Z sorting order
 
 ```
 @TestMethodOrder(Alphanumeric.class)
@@ -244,6 +244,10 @@ public class TestEmployee {
 
 ```
 
+_Output:_ <br/>
+
+![](images/DisplayAnnotation.png)
+
 <hr/>
 
 **5. @Disabled:** <br/> 
@@ -271,38 +275,50 @@ Note: testUpdate() is temporarily disabled.
 
 ```
 
+_Output:_ <br/>
+
+![](images/DisabledAnnotation.png)
+
 <hr/>
 
 **6. @RepeatedTest:** <br/>
 - To execute any test method multiple time (like batch processing)
 - EX: Export 1-10 Records, 10-20 Records.
 
-<hr/>
-
-**7. TestInfo** <br/>
-To know our test case details like classname, method name, display name, tag name etc. We can use once interface TestInfo
-
 ```
 
-public class TestEmployee {
+@DisplayName("Testing Employee Task")
+public class EmployeeTest {
 
-	@RepeatedTest(value =3, name = "{displayName} {currentRepetition}/{totalRepetitions}")
-	@DisplayName("Multiple Task")
-	public void testMultiple(TestInfo testInfo) {
-		System.out.println("Hello "+testInfo.getTestClass().get().getName());
-		System.out.println("DisHello: "+testInfo.getDisplayName());
+	
+	@RepeatedTest(value=3, name="{displayName} - {currentRepetition} / {totalRepetitions}")
+	@DisplayName("Multiple Test")
+	public void testMultiple(TestInfo info) {
+		System.out.println("Hello: "+info.getDisplayName());
 	}
 }
 
 ```
 
+```
+
+Note: While using @RepeatedTest we should not use @Test because if @Test is used then this will also execute one more time
+
+```
+
+
 _Output:_ <br/>
-Hello com.junit_test.TestEmployee <br/>
-DisHello: Multiple Task 1/3 <br/>
-Hello com.junit_test.TestEmployee <br/>
-DisHello: Multiple Task 2/3 <br/>
-Hello com.junit_test.TestEmployee <br/>
-DisHello: Multiple Task 3/3 <br/>
+Hello: Multiple Test - 1 / 3 <br/>
+Hello: Multiple Test - 2 / 3 <br/>
+Hello: Multiple Test - 3 / 3 <br/>
+
+
+<hr/>
+
+**7. TestInfo** <br/>
+To know our test case details like classname, method name, display name, tag name etc. We can use once interface TestInfo
+
+
 
 <hr/>
 
@@ -347,12 +363,12 @@ public void testB() {
 
 ```
 
-Junit-5 Session-2
-
-
-Assert API:
+### Assert API:
 - It is used to validate Test, IS CURRENT TEST PASS/FAIL ?
 - Expected value is compared with Actual Result.
+- Junit 5 has provided class : Assertions (org.junit.jupiter.api)
+- It contains all static method "assert methods".
+- Assert methods are used to compare expected value with Actual result if matching TEST PASS else TEST FAIL.
 
 
  
