@@ -13,9 +13,7 @@
 - Unit Testing = Testing once part project developed by programmer.
   Ex: EmployeeRegister
   
-  ```
   ![](images/WayUnitTest.png)
-  ```
 
 ### Junit 5:
 - Junit is a unit test framework. it is opensource java library.
@@ -49,7 +47,7 @@
 Note: For our test cases (Class + method) object creation and test-method calling done by Junit platform runtime. 
 ```
 
-** Architecture of Junit and its internal implementation**
+**Architecture of Junit and its internal implementation**
 
 ![](images/JunitRuntime.png)
 
@@ -64,7 +62,7 @@ Note: For our test cases (Class + method) object creation and test-method callin
 
 
 
-** Dependency **
+**Dependency**
 
 ```
 <dependency>
@@ -167,7 +165,7 @@ Save-Test <br/>
 <hr/>
 
 
-**3. @BeforeEach / @AfterEach / @BeforeAll / @AfterAll ** <br/>
+**3. @BeforeEach / @AfterEach / @BeforeAll / @AfterAll** <br/>
 - @BeforeEach: To execute any logic once per test method before starting it.
 - @AfterEach: To execute any logic once per test method after finishing it.
 - @BeforeAll: To execute any logic once per test case before starting.
@@ -221,8 +219,9 @@ Update-Test <br/>
 Clear-Setup <br/>
 Clear-Setup Once <br/>
 
+<hr/>
 
-**4. @DisplayName: ** <br/> 
+**4. @DisplayName:** <br/> 
 This annotation is used to provide 'Readable Text' in place of actual method and class name at Junit Console.
 
 ```
@@ -245,7 +244,9 @@ public class TestEmployee {
 
 ```
 
-**5. @Disabled: ** <br/> 
+<hr/>
+
+**5. @Disabled:** <br/> 
 This annotation is used to specify ignore one test-method while executing test-case (do not execute test method)
 
 ```
@@ -270,11 +271,15 @@ Note: testUpdate() is temporarily disabled.
 
 ```
 
-**6. @RepeatedTest: ** <br/>
+<hr/>
+
+**6. @RepeatedTest:** <br/>
 - To execute any test method multiple time (like batch processing)
 - EX: Export 1-10 Records, 10-20 Records.
 
-**7. TestInfo ** <br/>
+<hr/>
+
+**7. TestInfo** <br/>
 To know our test case details like classname, method name, display name, tag name etc. We can use once interface TestInfo
 
 ```
@@ -299,7 +304,9 @@ DisHello: Multiple Task 2/3 <br/>
 Hello com.junit_test.TestEmployee <br/>
 DisHello: Multiple Task 3/3 <br/>
 
-**8. @Tag ** <br/>
+<hr/>
+
+**8. @Tag** <br/>
 - These are used to filter test methods for execution in different environments.
 - For example, i want to test export example in production env at same i want to test delete operation only in development environment then use tag concept and maven-surefire-plugin in pox.xml
 
